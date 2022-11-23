@@ -265,10 +265,30 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                         ),
                                         FFButtonWidget(
                                           onPressed: () async {
-                                            await actions.signIn(
+                                            final isSignedIn =
+                                                await actions.signIn(
                                               loginEmailAddressController!.text,
                                               loginPasswordController!.text,
                                             );
+
+                                            if (isSignedIn) {
+                                              context.pushNamed(
+                                                'ProjectPageLatest',
+                                                extra: <String, dynamic>{
+                                                  kTransitionInfoKey:
+                                                      TransitionInfo(
+                                                    hasTransition: true,
+                                                    transitionType:
+                                                        PageTransitionType
+                                                            .scale,
+                                                    alignment:
+                                                        Alignment.bottomCenter,
+                                                    duration: Duration(
+                                                        milliseconds: 200),
+                                                  ),
+                                                },
+                                              );
+                                            }
                                           },
                                           text: 'Login',
                                           icon: Icon(

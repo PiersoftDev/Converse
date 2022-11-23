@@ -6,6 +6,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
+import 'package:amplify_flutter/amplify_flutter.dart';
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 
 class LandingPageLatestWidget extends StatefulWidget {
   const LandingPageLatestWidget({Key? key}) : super(key: key);
@@ -108,15 +110,31 @@ class _LandingPageLatestWidgetState extends State<LandingPageLatestWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(0, 60, 0, 0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          context.pushNamed(
-                            'LoginPage',
-                            extra: <String, dynamic>{
-                              kTransitionInfoKey: TransitionInfo(
-                                hasTransition: true,
-                                transitionType: PageTransitionType.rightToLeft,
-                              ),
-                            },
-                          );
+                          final result = await Amplify.Auth.fetchAuthSession();
+                          if (result.isSignedIn) {
+                            context.pushNamed(
+                              'ProjectPageLatest',
+                              extra: <String, dynamic>{
+                                kTransitionInfoKey: TransitionInfo(
+                                  hasTransition: true,
+                                  transitionType: PageTransitionType.scale,
+                                  alignment: Alignment.bottomCenter,
+                                  duration: Duration(milliseconds: 200),
+                                ),
+                              },
+                            );
+                          } else {
+                            context.pushNamed(
+                              'LoginPage',
+                              extra: <String, dynamic>{
+                                kTransitionInfoKey: TransitionInfo(
+                                  hasTransition: true,
+                                  transitionType:
+                                      PageTransitionType.rightToLeft,
+                                ),
+                              },
+                            );
+                          }
                         },
                         text: 'Explore',
                         icon: FaIcon(

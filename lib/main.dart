@@ -6,6 +6,9 @@ import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
+import 'package:amplify_flutter/amplify_flutter.dart';
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'amplifyconfiguration.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,10 +41,23 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     _appStateNotifier = AppStateNotifier();
     _router = createRouter(_appStateNotifier);
+    _configureAmplify();
   }
 
   void setLocale(String language) {
     setState(() => _locale = createLocale(language));
+  }
+
+  Future<void> _configureAmplify() async {
+    try {
+      final auth = AmplifyAuthCognito();
+      await Amplify.addPlugin(auth);
+
+      // call Amplify.configure to use the initialized categories in your app
+      await Amplify.configure(amplifyconfig);
+    } on Exception catch (e) {
+      safePrint('An error occurred configuring Amplify: $e');
+    }
   }
 
   void setThemeMode(ThemeMode mode) => setState(() {
