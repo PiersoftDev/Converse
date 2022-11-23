@@ -1,6 +1,7 @@
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -263,8 +264,11 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                           ),
                                         ),
                                         FFButtonWidget(
-                                          onPressed: () {
-                                            print('LoginButton pressed ...');
+                                          onPressed: () async {
+                                            await actions.signIn(
+                                              loginEmailAddressController!.text,
+                                              loginPasswordController!.text,
+                                            );
                                           },
                                           text: 'Login',
                                           icon: Icon(

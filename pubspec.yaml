@@ -25,6 +25,10 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  amplify_api: ^0.6.0
+  amplify_auth_cognito: ^0.6.0
+  amplify_datastore: ^0.6.0
+  amplify_flutter: ^0.6.0
   auto_size_text: 3.0.0
   cached_network_image: 3.2.1
   collection: 1.16.0
