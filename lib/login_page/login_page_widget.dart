@@ -577,6 +577,16 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                                   0, 20, 0, 0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
+                                              await actions.signUp(
+                                                createAccountEmailAddressController!
+                                                    .text,
+                                                createAccountPasswordController!
+                                                    .text,
+                                              );
+                                              await Future.delayed(
+                                                  const Duration(
+                                                      milliseconds: 1000));
+
                                               context.pushNamed(
                                                 'EmailVerificationCodePage',
                                                 extra: <String, dynamic>{
