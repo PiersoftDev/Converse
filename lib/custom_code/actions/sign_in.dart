@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 
-void signIn(loginEmail, loginPassword) async {
+Future<void> signIn(loginEmail, loginPassword) async {
   // Sign out before in case a user is already signed in
   // If a user is already signed in - Amplify.Auth.signIn will throw an exception
   try {
