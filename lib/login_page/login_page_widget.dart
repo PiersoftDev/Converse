@@ -404,7 +404,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                                 .subtitle2
                                                 .override(
                                                   fontFamily: 'Outfit',
-                                                  color: Color(0x00EF6565),
+                                                  color: Color(0xFF2351A3),
                                                   fontWeight: FontWeight.normal,
                                                 ),
                                           ),
@@ -577,6 +577,10 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                                   0, 20, 0, 0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
+                                              setState(() => FFAppState()
+                                                      .userEmail =
+                                                  createAccountEmailAddressController!
+                                                      .text);
                                               await actions.signUp(
                                                 createAccountEmailAddressController!
                                                     .text,

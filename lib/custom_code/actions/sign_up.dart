@@ -12,7 +12,6 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 Future<void> signUp(registerEmail, registerPassword) async {
   Map<CognitoUserAttributeKey, String> userAttributes = {
     CognitoUserAttributeKey.email: registerEmail,
-    CognitoUserAttributeKey.password: registerPassword,
   };
 
   try {
