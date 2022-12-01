@@ -70,12 +70,19 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Lottie.asset(
-                  'assets/lottie_animations/107800-login-leady.json',
-                  width: MediaQuery.of(context).size.width,
-                  height: 400,
-                  fit: BoxFit.contain,
-                  animate: true,
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  decoration: BoxDecoration(
+                    color: Color(0xFFABCBD7),
+                  ),
+                  child: Lottie.asset(
+                    'assets/lottie_animations/107800-login-leady.json',
+                    width: MediaQuery.of(context).size.width,
+                    height: 400,
+                    fit: BoxFit.contain,
+                    animate: true,
+                  ),
                 ),
                 Expanded(
                   child: DefaultTabController(
@@ -107,7 +114,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                             children: [
                               Form(
                                 key: formKey1,
-                                autovalidateMode: AutovalidateMode.disabled,
+                                autovalidateMode: AutovalidateMode.always,
                                 child: Container(
                                   width: 100,
                                   decoration: BoxDecoration(
