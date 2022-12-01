@@ -152,6 +152,9 @@ class _UserProfilePageWidgetState extends State<UserProfilePageWidget> {
                                             return;
                                           }
                                         }
+
+                                        setState(() => FFAppState().userEmail =
+                                            uploadedFileUrl);
                                       },
                                       child: SvgPicture.asset(
                                         'assets/images/undraw_pic_profile_re_7g2h.svg',
