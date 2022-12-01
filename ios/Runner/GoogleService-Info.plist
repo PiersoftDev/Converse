@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>709642001443-6hpashs6ljqas8hftq8h18demaub22gr.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.709642001443-6hpashs6ljqas8hftq8h18demaub22gr</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>709642001443-pa03iil9sqp60etavk45pj19tgooqtqn.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCkaA4NWTGNJkSCGPkq1iWKFQqkncqP2dg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>709642001443</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.kmv.converse</string>
+	<key>PROJECT_ID</key>
+	<string>converse-a7474</string>
+	<key>STORAGE_BUCKET</key>
+	<string>converse-a7474.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:709642001443:ios:a7f5edd3e0fab6a679a596</string>
+</dict>
+</plist>

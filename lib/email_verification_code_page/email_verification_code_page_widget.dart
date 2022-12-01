@@ -2,9 +2,9 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import '../custom_code/actions/email_confirmation.dart' as actions;
 
 class EmailVerificationCodePageWidget extends StatefulWidget {
   const EmailVerificationCodePageWidget({Key? key}) : super(key: key);
@@ -18,13 +18,11 @@ class _EmailVerificationCodePageWidgetState
     extends State<EmailVerificationCodePageWidget> {
   TextEditingController? pinCodeController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  bool _showUserConfirmation = false;
 
   @override
   void initState() {
     super.initState();
     pinCodeController = TextEditingController();
-    _showUserConfirmation = false;
   }
 
   @override
@@ -40,16 +38,16 @@ class _EmailVerificationCodePageWidgetState
         elevation: 0,
       ),
       body: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
-                  child: SingleChildScrollView(
-                      child: Column(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
+                child: SingleChildScrollView(
+                  child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Text(
@@ -110,29 +108,19 @@ class _EmailVerificationCodePageWidgetState
                           controller: pinCodeController,
                           onChanged: (_) => {},
                           onCompleted: (_) async {
-                            final userConfirmed = await actions
-                                .confirmSignUp(pinCodeController!.text);
-                            if (userConfirmed) {
-                              setState(() {
-                                _showUserConfirmation = true;
-                              });
-                            }
+                            await Future.delayed(
+                                const Duration(milliseconds: 3000));
                           },
                         ),
                       ),
-                    ],
-                  )),
-                ),
-                Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 250),
-                    child: Container(
-                        width: double.infinity,
-                        //height: MediaQuery.of(context).size.height * 0.3,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).primaryColor,
-                        ),
-                        child: Visibility(
-                          visible: _showUserConfirmation,
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 250),
+                        child: Container(
+                          width: double.infinity,
+                          height: MediaQuery.of(context).size.height * 0.3,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).primaryColor,
+                          ),
                           child: SingleChildScrollView(
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
@@ -141,7 +129,7 @@ class _EmailVerificationCodePageWidgetState
                                   'assets/lottie_animations/8603-profile.json',
                                   width: 200,
                                   height: 200,
-                                  fit: BoxFit.cover,
+                                  fit: BoxFit.contain,
                                   repeat: false,
                                   animate: true,
                                 ),
@@ -157,10 +145,16 @@ class _EmailVerificationCodePageWidgetState
                               ],
                             ),
                           ),
-                        ))),
-              ],
-            ),
-          )),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

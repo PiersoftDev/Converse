@@ -1,3 +1,3 @@
-export 'sign_in.dart' show signIn;
 export 'sign_up.dart' show signUp;
-export 'email_confirmation.dart' show confirmSignUp;
+export 'confirm_sign_up.dart' show confirmSignUp;
+export 'get_auth_session.dart' show getAuthSession;

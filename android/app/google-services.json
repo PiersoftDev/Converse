@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "709642001443",
+    "project_id": "converse-a7474",
+    "storage_bucket": "converse-a7474.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:709642001443:android:5f6703c96dbaab2879a596",
+        "android_client_info": {
+          "package_name": "com.kmv.converse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "709642001443-pa03iil9sqp60etavk45pj19tgooqtqn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kmv.converse",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "709642001443-rlnvi8cbbp2nf6fkfuo0u46qi5pvjra6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPc6M6nI6y78torZQdxlzg6yk8KA8eBwg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "709642001443-rlnvi8cbbp2nf6fkfuo0u46qi5pvjra6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "709642001443-6hpashs6ljqas8hftq8h18demaub22gr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kmv.converse"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

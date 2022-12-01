@@ -19,6 +19,12 @@ class FFAppState {
   late SharedPreferences prefs;
 
   String userEmail = '';
+
+  bool invalidOtpRetry = false;
+
+  String registerSignInLabel = '';
+
+  String registerSignInButtonLabel = '';
 }
 
 LatLng? _latLngFromString(String? val) {

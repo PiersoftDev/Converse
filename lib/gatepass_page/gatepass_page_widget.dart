@@ -7,6 +7,7 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/place.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -21,7 +22,8 @@ class _GatepassPageWidgetState extends State<GatepassPageWidget> {
   TextEditingController? driverNameTextFieldController;
   TextEditingController? driverPhoneNumberTextFieldController;
   TextEditingController? vendorTextFieldController;
-  TextEditingController? materialTextFieldController;
+  TextEditingController? materialTextFieldController1;
+  TextEditingController? materialTextFieldController2;
   var placePickerValue = FFPlace();
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -32,7 +34,8 @@ class _GatepassPageWidgetState extends State<GatepassPageWidget> {
     driverNameTextFieldController = TextEditingController();
     driverPhoneNumberTextFieldController = TextEditingController();
     vendorTextFieldController = TextEditingController();
-    materialTextFieldController = TextEditingController();
+    materialTextFieldController1 = TextEditingController();
+    materialTextFieldController2 = TextEditingController();
   }
 
   @override
@@ -40,7 +43,8 @@ class _GatepassPageWidgetState extends State<GatepassPageWidget> {
     driverNameTextFieldController?.dispose();
     driverPhoneNumberTextFieldController?.dispose();
     vendorTextFieldController?.dispose();
-    materialTextFieldController?.dispose();
+    materialTextFieldController1?.dispose();
+    materialTextFieldController2?.dispose();
     super.dispose();
   }
 
@@ -313,7 +317,62 @@ class _GatepassPageWidgetState extends State<GatepassPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0, 10, 0, 0),
                                       child: TextFormField(
-                                        controller: materialTextFieldController,
+                                        controller:
+                                            materialTextFieldController1,
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          hintText: 'Material\n',
+                                          hintStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyText2,
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0xFF4AA0EB),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0xFF4AA0EB),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          filled: true,
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 10, 0, 0),
+                                      child: TextFormField(
+                                        controller:
+                                            materialTextFieldController2,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           hintText: 'Material\n',

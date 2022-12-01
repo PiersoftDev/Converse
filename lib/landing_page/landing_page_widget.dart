@@ -1,24 +1,73 @@
+import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
-import 'package:amplify_flutter/amplify_flutter.dart';
-import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 
-class LandingPageLatestWidget extends StatefulWidget {
-  const LandingPageLatestWidget({Key? key}) : super(key: key);
+class LandingPageWidget extends StatefulWidget {
+  const LandingPageWidget({Key? key}) : super(key: key);
 
   @override
-  _LandingPageLatestWidgetState createState() =>
-      _LandingPageLatestWidgetState();
+  _LandingPageWidgetState createState() => _LandingPageWidgetState();
 }
 
-class _LandingPageLatestWidgetState extends State<LandingPageLatestWidget> {
+class _LandingPageWidgetState extends State<LandingPageWidget>
+    with TickerProviderStateMixin {
+  final animationsMap = {
+    'textOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 1000.ms,
+          duration: 2000.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+  };
+  bool? isSignedIn;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await Future.delayed(const Duration(milliseconds: 1000));
+      isSignedIn = await actions.getAuthSession(
+        context,
+      );
+      if (isSignedIn == true) {
+        context.pushNamed('ProjectPage');
+      } else {
+        setState(() => FFAppState().registerSignInLabel = 'Register');
+        setState(() => FFAppState().registerSignInButtonLabel = 'Register');
+        await Future.delayed(const Duration(milliseconds: 500));
+
+        context.pushNamed(
+          'LoginPage',
+          extra: <String, dynamic>{
+            kTransitionInfoKey: TransitionInfo(
+              hasTransition: true,
+              transitionType: PageTransitionType.leftToRight,
+              duration: Duration(milliseconds: 300),
+            ),
+          },
+        );
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,56 +150,31 @@ class _LandingPageLatestWidgetState extends State<LandingPageLatestWidget> {
                         colors: [Color(0xFF1A374D), Color(0xFF4E4BED)],
                         gradientDirection: GradientDirection.ltr,
                         gradientType: GradientType.linear,
-                      )),
+                      )).animateOnPageLoad(
+                          animationsMap['textOnPageLoadAnimation']!),
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0, 0.05),
+                    alignment: AlignmentDirectional(0, 0),
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 60, 0, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          final result = await Amplify.Auth.fetchAuthSession();
-                          if (result.isSignedIn) {
-                            context.pushNamed(
-                              'ProjectPageLatest',
-                              extra: <String, dynamic>{
-                                kTransitionInfoKey: TransitionInfo(
-                                  hasTransition: true,
-                                  transitionType: PageTransitionType.scale,
-                                  alignment: Alignment.bottomCenter,
-                                  duration: Duration(milliseconds: 200),
-                                ),
-                              },
-                            );
-                          } else {
-                            context.pushNamed(
-                              'LoginPage',
-                              extra: <String, dynamic>{
-                                kTransitionInfoKey: TransitionInfo(
-                                  hasTransition: true,
-                                  transitionType:
-                                      PageTransitionType.rightToLeft,
-                                ),
-                              },
-                            );
-                          }
+                          context.pushNamed('LoginPage');
                         },
                         text: 'Explore',
                         icon: FaIcon(
                           FontAwesomeIcons.rocket,
                         ),
                         options: FFButtonOptions(
-                          width: 180,
+                          width: 150,
                           height: 40,
-                          color: Color(0xFF406882),
+                          color: FlutterFlowTheme.of(context).primaryBtnText,
                           textStyle:
                               FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Roboto',
+                                    fontFamily: 'Lexend Deca',
                                     color: Colors.white,
-                                    fontSize: 20,
-                                    letterSpacing: 0.5,
-                                    fontWeight: FontWeight.w500,
+                                    fontSize: 18,
                                   ),
                           borderSide: BorderSide(
                             color: Colors.transparent,

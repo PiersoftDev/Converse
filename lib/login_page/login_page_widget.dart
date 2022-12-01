@@ -1,9 +1,10 @@
+import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
@@ -27,8 +28,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
 
   late bool loginPasswordVisibility;
   final formKey1 = GlobalKey<FormState>();
-  final formKey2 = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final formKey2 = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -71,15 +72,15 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Lottie.asset(
-                  'assets/lottie_animations/77148-construction-men-at-work.json',
+                  'assets/lottie_animations/107800-login-leady.json',
                   width: MediaQuery.of(context).size.width,
-                  height: 250,
-                  fit: BoxFit.fill,
+                  height: 400,
+                  fit: BoxFit.contain,
                   animate: true,
                 ),
                 Expanded(
                   child: DefaultTabController(
-                    length: 3,
+                    length: 2,
                     initialIndex: 0,
                     child: Column(
                       children: [
@@ -100,16 +101,13 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                             Tab(
                               text: 'Sign Up',
                             ),
-                            Tab(
-                              text: 'Guest',
-                            ),
                           ],
                         ),
                         Expanded(
                           child: TabBarView(
                             children: [
                               Form(
-                                key: formKey2,
+                                key: formKey1,
                                 autovalidateMode: AutovalidateMode.disabled,
                                 child: Container(
                                   width: 100,
@@ -265,30 +263,20 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                         ),
                                         FFButtonWidget(
                                           onPressed: () async {
-                                            final isSignedIn =
-                                                await actions.signIn(
+                                            GoRouter.of(context)
+                                                .prepareAuthEvent();
+
+                                            final user = await signInWithEmail(
+                                              context,
                                               loginEmailAddressController!.text,
                                               loginPasswordController!.text,
                                             );
-
-                                            if (isSignedIn) {
-                                              context.pushNamed(
-                                                'ProjectPageLatest',
-                                                extra: <String, dynamic>{
-                                                  kTransitionInfoKey:
-                                                      TransitionInfo(
-                                                    hasTransition: true,
-                                                    transitionType:
-                                                        PageTransitionType
-                                                            .scale,
-                                                    alignment:
-                                                        Alignment.bottomCenter,
-                                                    duration: Duration(
-                                                        milliseconds: 200),
-                                                  ),
-                                                },
-                                              );
+                                            if (user == null) {
+                                              return;
                                             }
+
+                                            context.goNamedAuth(
+                                                'ProjectPage', mounted);
                                           },
                                           text: 'Login',
                                           icon: Icon(
@@ -355,7 +343,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                 ),
                               ),
                               Form(
-                                key: formKey1,
+                                key: formKey2,
                                 autovalidateMode: AutovalidateMode.disabled,
                                 child: Container(
                                   width: 100,
@@ -660,66 +648,6 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                         ),
                                       ],
                                     ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFADCBD7),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 100, 0, 0),
-                                        child: FFButtonWidget(
-                                          onPressed: () async {
-                                            context.pushNamed(
-                                              'ProjectPageLatest',
-                                              extra: <String, dynamic>{
-                                                kTransitionInfoKey:
-                                                    TransitionInfo(
-                                                  hasTransition: true,
-                                                  transitionType:
-                                                      PageTransitionType
-                                                          .rightToLeft,
-                                                  duration:
-                                                      Duration(milliseconds: 0),
-                                                ),
-                                              },
-                                            );
-                                          },
-                                          text: 'Continue as guest !!',
-                                          icon: FaIcon(
-                                            FontAwesomeIcons.mugHot,
-                                          ),
-                                          options: FFButtonOptions(
-                                            width: 230,
-                                            height: 40,
-                                            color: Color(0xFF406882),
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle2
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                    ),
-                                            borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
                                   ),
                                 ),
                               ),
