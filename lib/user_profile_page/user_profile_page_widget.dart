@@ -1,5 +1,7 @@
+import '../backend/firebase_storage/storage.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/upload_media.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -13,6 +15,9 @@ class UserProfilePageWidget extends StatefulWidget {
 }
 
 class _UserProfilePageWidgetState extends State<UserProfilePageWidget> {
+  bool isMediaUploading = false;
+  String uploadedFileUrl = '';
+
   TextEditingController? textController1;
   TextEditingController? textController2;
   TextEditingController? textController3;
@@ -102,11 +107,58 @@ class _UserProfilePageWidgetState extends State<UserProfilePageWidget> {
                                           .primaryColor,
                                       shape: BoxShape.circle,
                                     ),
-                                    child: SvgPicture.asset(
-                                      'assets/images/undraw_pic_profile_re_7g2h.svg',
-                                      width: 100,
-                                      height: 100,
-                                      fit: BoxFit.cover,
+                                    child: InkWell(
+                                      onTap: () async {
+                                        final selectedMedia = await selectMedia(
+                                          multiImage: false,
+                                        );
+                                        if (selectedMedia != null &&
+                                            selectedMedia.every((m) =>
+                                                validateFileFormat(
+                                                    m.storagePath, context))) {
+                                          setState(
+                                              () => isMediaUploading = true);
+                                          var downloadUrls = <String>[];
+                                          try {
+                                            showUploadMessage(
+                                              context,
+                                              'Uploading file...',
+                                              showLoading: true,
+                                            );
+                                            downloadUrls = (await Future.wait(
+                                              selectedMedia.map(
+                                                (m) async => await uploadData(
+                                                    m.storagePath, m.bytes),
+                                              ),
+                                            ))
+                                                .where((u) => u != null)
+                                                .map((u) => u!)
+                                                .toList();
+                                          } finally {
+                                            ScaffoldMessenger.of(context)
+                                                .hideCurrentSnackBar();
+                                            isMediaUploading = false;
+                                          }
+                                          if (downloadUrls.length ==
+                                              selectedMedia.length) {
+                                            setState(() => uploadedFileUrl =
+                                                downloadUrls.first);
+                                            showUploadMessage(
+                                                context, 'Success!');
+                                          } else {
+                                            setState(() {});
+                                            showUploadMessage(context,
+                                                'Failed to upload media');
+                                            return;
+                                          }
+                                        }
+                                      },
+                                      child: SvgPicture.asset(
+                                        'assets/images/undraw_pic_profile_re_7g2h.svg',
+                                        width: 100,
+                                        height: 100,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                 ),
