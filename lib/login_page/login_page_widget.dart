@@ -2,7 +2,6 @@ import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -585,36 +584,37 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                                   0, 20, 0, 0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
-                                              setState(() => FFAppState()
-                                                      .userEmail =
-                                                  createAccountEmailAddressController!
-                                                      .text);
-                                              await actions.signUp(
+                                              GoRouter.of(context)
+                                                  .prepareAuthEvent();
+                                              if (createAccountPasswordController
+                                                      ?.text !=
+                                                  confirmPasswordController
+                                                      ?.text) {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(
+                                                      'Passwords don\'t match!',
+                                                    ),
+                                                  ),
+                                                );
+                                                return;
+                                              }
+
+                                              final user =
+                                                  await createAccountWithEmail(
+                                                context,
                                                 createAccountEmailAddressController!
                                                     .text,
                                                 createAccountPasswordController!
                                                     .text,
                                               );
-                                              await Future.delayed(
-                                                  const Duration(
-                                                      milliseconds: 1000));
+                                              if (user == null) {
+                                                return;
+                                              }
 
-                                              context.pushNamed(
-                                                'EmailVerificationCodePage',
-                                                extra: <String, dynamic>{
-                                                  kTransitionInfoKey:
-                                                      TransitionInfo(
-                                                    hasTransition: true,
-                                                    transitionType:
-                                                        PageTransitionType
-                                                            .scale,
-                                                    alignment:
-                                                        Alignment.bottomCenter,
-                                                    duration: Duration(
-                                                        milliseconds: 200),
-                                                  ),
-                                                },
-                                              );
+                                              context.goNamedAuth(
+                                                  'ProjectPage', mounted);
                                             },
                                             text: 'Create Profile',
                                             icon: Icon(
